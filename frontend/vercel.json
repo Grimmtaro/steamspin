@@ -2,17 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/node",
+      "src": "frontend/package.json",      // Point to the frontend folder's package.json
+      "use": "@vercel/static-build",       // Use static build for frontend React app
       "config": {
-        "includeFiles": ["vite.config.js", "public/**/*"]
+        "distDir": "frontend/build"       // Ensure the build folder inside frontend is used
       }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "src": "/(.*)",                       // Route all paths
+      "dest": "/frontend/build/$1"          // Serve the built files from the frontend/build directory
     }
   ]
 }
